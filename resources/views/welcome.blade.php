@@ -86,6 +86,10 @@
                 </div>
             </div>
         </div>
+        <script>
+          window.Laravel = {};
+          window.Laravel.csrfToken = "{{ csrf_token() }}";
+        </script>
         <script src="{{ mix('/js/app.js') }}"></script>
     </body>
 </html>

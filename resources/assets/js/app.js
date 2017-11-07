@@ -20,7 +20,20 @@ const app = new Vue({
     el: '#app'
 });
 
-window.Echo.join('hoge')
+console.log(app);
+
+const channel = window.Echo.join('hoge')
+  .here(() => {
+    console.log('here');
+  })
+  .joining(() => {
+    console.log('joining');
+  })
+  .leaving(() => {
+    console.log('leaving');
+  })
   .listen('WorkCreated', (e) => {
     console.log(e.update);
   });
+
+console.log(channel);

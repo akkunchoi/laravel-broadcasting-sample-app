@@ -22,8 +22,8 @@ class WorkController extends Controller
     
     public function store()
     {
-//        event(new WorkCreated());
-        broadcast(new WorkCreated())->toOthers();
+        event(new WorkCreated());
+//        broadcast(new WorkCreated())->toOthers();
         
         return ['status' => 200];
     }

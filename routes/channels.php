@@ -11,9 +11,8 @@
 |
 */
 
-Broadcast::channel('hoge', function ($user, $id) {
-    return true;
-    return (int) $user->id === (int) $id;
+Broadcast::channel('{name}', function ($user, $name) {
+    return ['name' => 'guest'];
 });
 
 //Broadcast::channel('App.User.{id}', function ($user, $id) {
