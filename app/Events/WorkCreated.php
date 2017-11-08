@@ -8,9 +8,17 @@ use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
+use App\User;
 
 class WorkCreated implements ShouldBroadcast
 {
+    protected $user;
+    
+    public function __construct(User $user)
+    {
+        $this->user = $user;
+    }
+
     /**
      * Get the channels the event should broadcast on.
      *
@@ -20,4 +28,9 @@ class WorkCreated implements ShouldBroadcast
     {
         return new PresenceChannel('hoge');
     }
+    
+    public function broadcastWith()
+    {
+        return ['id' => $this->user->id, 'name' => $this->user->name];
+    }    
 }

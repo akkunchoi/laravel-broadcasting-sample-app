@@ -67,7 +67,7 @@
     </head>
     <body>
         <p>{{ $user->name }}</p>
-        <div class="flex-center position-ref full-height">
+        <div class="position-ref full-height">
             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
@@ -90,6 +90,7 @@
         <script>
           window.Laravel = {};
           window.Laravel.csrfToken = "{{ csrf_token() }}";
+          window.Laravel.user = {!! json_encode($user) !!};
         </script>
         <script src="{{ mix('/js/app.js') }}"></script>
     </body>

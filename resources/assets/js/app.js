@@ -20,7 +20,8 @@ const app = new Vue({
     el: '#app'
 });
 
-console.log(app);
+
+Laravel.participants = {};
 
 const channel = window.Echo.join('hoge')
   .here(() => {
@@ -33,7 +34,11 @@ const channel = window.Echo.join('hoge')
     console.log('leaving');
   })
   .listen('WorkCreated', (e) => {
-    console.log(e.update);
+    if (!Laravel.participants[e.name]) {
+      Laravel.participants[e.name] = 0;
+    }
+    Laravel.participants[e.name]++;
+    console.log(Laravel.participants);
   });
 
 console.log(channel);

@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Log;
 use App\Events\WorkCreated;
 use App\User;
-use Illuminate\Broadcasting\PrivateChannel;
+use Auth;
 
 class WorkController extends Controller
 {
@@ -22,8 +21,9 @@ class WorkController extends Controller
     
     public function store()
     {
-        event(new WorkCreated());
-//        broadcast(new WorkCreated())->toOthers();
+        $user = Auth::user();
+        
+        event(new WorkCreated($user));
         
         return ['status' => 200];
     }
