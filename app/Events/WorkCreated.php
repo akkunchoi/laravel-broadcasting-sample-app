@@ -32,6 +32,12 @@ class WorkCreated implements ShouldBroadcast
     
     public function broadcastWith()
     {
-        return ['id' => $this->user->id, 'name' => $this->user->name, 'count' => $this->options['count']];
+        return [
+            'user' => [
+                'id' => $this->user->id, 
+                'name' => $this->user->name
+            ],
+            'count' => $this->options['count']
+        ];
     }    
 }

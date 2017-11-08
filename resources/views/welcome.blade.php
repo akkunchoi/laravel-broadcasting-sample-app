@@ -66,7 +66,6 @@
         <link rel="stylesheet" href="{{ mix('/css/app.css') }}">
     </head>
     <body>
-        <p>{{ $user->name }}</p>
         <div class="position-ref full-height">
             @if (Route::has('login'))
                 <div class="top-right links">
@@ -80,9 +79,9 @@
             @endif
 
             <div class="content">
-                <div class="title m-b-md">
+                <div class="m-b-md">
                     <div id="app">
-                        <example-component></example-component>
+                        <example-component :participants="participants" :user="user"></example-component>
                     </div>
                 </div>
             </div>
