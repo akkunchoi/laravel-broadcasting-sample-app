@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "3b148923152a5a51264e6887d8ad76cb",
+    "content-hash": "2d18ac48948f31f1b40a36282c0bb445",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -405,16 +405,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v5.5.19",
+            "version": "v5.5.20",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "c678100e84934ec85c9f8bc26bd0a60222682719"
+                "reference": "ce0019d22a83b1b240330ea4115ae27a4d75d79c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/c678100e84934ec85c9f8bc26bd0a60222682719",
-                "reference": "c678100e84934ec85c9f8bc26bd0a60222682719",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/ce0019d22a83b1b240330ea4115ae27a4d75d79c",
+                "reference": "ce0019d22a83b1b240330ea4115ae27a4d75d79c",
                 "shasum": ""
             },
             "require": {
@@ -496,7 +496,7 @@
                 "nexmo/client": "Required to use the Nexmo transport (~1.0).",
                 "pda/pheanstalk": "Required to use the beanstalk queue driver (~3.0).",
                 "predis/predis": "Required to use the redis cache and queue drivers (~1.0).",
-                "pusher/pusher-php-server": "Required to use the Pusher broadcast driver (~2.0).",
+                "pusher/pusher-php-server": "Required to use the Pusher broadcast driver (~3.0).",
                 "symfony/css-selector": "Required to use some of the crawler integration testing tools (~3.3).",
                 "symfony/dom-crawler": "Required to use most of the crawler integration testing tools (~3.3).",
                 "symfony/psr-http-message-bridge": "Required to psr7 bridging features (~1.0)."
@@ -532,7 +532,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2017-10-25T19:10:45+00:00"
+            "time": "2017-11-07T14:24:50+00:00"
         },
         {
             "name": "laravel/tinker",
@@ -2207,6 +2207,128 @@
     ],
     "packages-dev": [
         {
+            "name": "barryvdh/laravel-ide-helper",
+            "version": "v2.4.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/barryvdh/laravel-ide-helper.git",
+                "reference": "2b1273c45e2f8df7a625563e2283a17c14f02ae8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/barryvdh/laravel-ide-helper/zipball/2b1273c45e2f8df7a625563e2283a17c14f02ae8",
+                "reference": "2b1273c45e2f8df7a625563e2283a17c14f02ae8",
+                "shasum": ""
+            },
+            "require": {
+                "barryvdh/reflection-docblock": "^2.0.4",
+                "illuminate/console": "^5.0,<5.6",
+                "illuminate/filesystem": "^5.0,<5.6",
+                "illuminate/support": "^5.0,<5.6",
+                "php": ">=5.4.0",
+                "symfony/class-loader": "^2.3|^3.0"
+            },
+            "require-dev": {
+                "doctrine/dbal": "~2.3",
+                "illuminate/config": "^5.0,<5.6",
+                "illuminate/view": "^5.0,<5.6",
+                "phpunit/phpunit": "4.*",
+                "scrutinizer/ocular": "~1.1",
+                "squizlabs/php_codesniffer": "~2.3"
+            },
+            "suggest": {
+                "doctrine/dbal": "Load information from the database about models for phpdocs (~2.3)"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.3-dev"
+                },
+                "laravel": {
+                    "providers": [
+                        "Barryvdh\\LaravelIdeHelper\\IdeHelperServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Barryvdh\\LaravelIdeHelper\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Barry vd. Heuvel",
+                    "email": "barryvdh@gmail.com"
+                }
+            ],
+            "description": "Laravel IDE Helper, generates correct PHPDocs for all Facade classes, to improve auto-completion.",
+            "keywords": [
+                "autocomplete",
+                "codeintel",
+                "helper",
+                "ide",
+                "laravel",
+                "netbeans",
+                "phpdoc",
+                "phpstorm",
+                "sublime"
+            ],
+            "time": "2017-07-16T00:24:12+00:00"
+        },
+        {
+            "name": "barryvdh/reflection-docblock",
+            "version": "v2.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/barryvdh/ReflectionDocBlock.git",
+                "reference": "3dcbd98b5d9384a5357266efba8fd29884458e5c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/barryvdh/ReflectionDocBlock/zipball/3dcbd98b5d9384a5357266efba8fd29884458e5c",
+                "reference": "3dcbd98b5d9384a5357266efba8fd29884458e5c",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0,<4.5"
+            },
+            "suggest": {
+                "dflydev/markdown": "~1.0",
+                "erusev/parsedown": "~1.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Barryvdh": [
+                        "src/"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mike van Riel",
+                    "email": "mike.vanriel@naenius.com"
+                }
+            ],
+            "time": "2016-06-13T19:28:20+00:00"
+        },
+        {
             "name": "doctrine/instantiator",
             "version": "1.0.5",
             "source": {
@@ -3092,16 +3214,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "6.4.3",
+            "version": "6.4.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "06b28548fd2b4a20c3cd6e247dc86331a7d4db13"
+                "reference": "562f7dc75d46510a4ed5d16189ae57fbe45a9932"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/06b28548fd2b4a20c3cd6e247dc86331a7d4db13",
-                "reference": "06b28548fd2b4a20c3cd6e247dc86331a7d4db13",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/562f7dc75d46510a4ed5d16189ae57fbe45a9932",
+                "reference": "562f7dc75d46510a4ed5d16189ae57fbe45a9932",
                 "shasum": ""
             },
             "require": {
@@ -3172,7 +3294,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2017-10-16T13:18:59+00:00"
+            "time": "2017-11-08T11:26:09+00:00"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
@@ -3791,6 +3913,62 @@
             "description": "Library that helps with managing the version number of Git-hosted PHP projects",
             "homepage": "https://github.com/sebastianbergmann/version",
             "time": "2016-10-03T07:35:21+00:00"
+        },
+        {
+            "name": "symfony/class-loader",
+            "version": "v3.3.10",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/class-loader.git",
+                "reference": "7572c904b209fa9907c69a6a9a68243c265a4d01"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/class-loader/zipball/7572c904b209fa9907c69a6a9a68243c265a4d01",
+                "reference": "7572c904b209fa9907c69a6a9a68243c265a4d01",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.5.9|>=7.0.8"
+            },
+            "require-dev": {
+                "symfony/finder": "~2.8|~3.0",
+                "symfony/polyfill-apcu": "~1.1"
+            },
+            "suggest": {
+                "symfony/polyfill-apcu": "For using ApcClassLoader on HHVM"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.3-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\ClassLoader\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony ClassLoader Component",
+            "homepage": "https://symfony.com",
+            "time": "2017-10-02T06:42:24+00:00"
         },
         {
             "name": "theseer/tokenizer",
