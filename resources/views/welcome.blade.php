@@ -66,6 +66,7 @@
         <link rel="stylesheet" href="{{ mix('/css/app.css') }}">
     </head>
     <body>
+        <p>{{ $user->name }}</p>
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
                 <div class="top-right links">
