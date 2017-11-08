@@ -14,9 +14,10 @@ class WorkCreated implements ShouldBroadcast
 {
     protected $user;
     
-    public function __construct(User $user)
+    public function __construct(User $user, $options)
     {
         $this->user = $user;
+        $this->options = $options;
     }
 
     /**
@@ -31,6 +32,6 @@ class WorkCreated implements ShouldBroadcast
     
     public function broadcastWith()
     {
-        return ['id' => $this->user->id, 'name' => $this->user->name];
+        return ['id' => $this->user->id, 'name' => $this->user->name, 'count' => $this->options['count']];
     }    
 }

@@ -37,7 +37,7 @@ const channel = window.Echo.join('hoge')
     if (!Laravel.participants[e.name]) {
       Laravel.participants[e.name] = 0;
     }
-    Laravel.participants[e.name]++;
+    Laravel.participants[e.name] += e.count || 1;
     console.log(Laravel.participants);
   });
 

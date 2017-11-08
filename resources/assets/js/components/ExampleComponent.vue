@@ -18,17 +18,22 @@
 
 <script>
     import axios from 'axios';
-//    import lodash from 'lodash';
+    import _ from 'lodash';
     
     export default {
         mounted() {
+            this.count = 0;
+            this.throttlePost = _.throttle(() => {
+                axios.post('/works', {count: this.count});
+                this.count = 0;
+            }, 1000);
             console.log('Component mounted.')
         },
+        
         methods: {
             post() {
-//                _.throttle(() => {
-                    axios.post('/works', {count: count});
-//                }, 1000)
+                this.count++;
+                this.throttlePost();
             }
         }
     }

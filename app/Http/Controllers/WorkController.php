@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Events\WorkCreated;
 use App\User;
 use Auth;
+use Illuminate\Http\Request;
 
 class WorkController extends Controller
 {
@@ -19,11 +20,11 @@ class WorkController extends Controller
         return view('user.profile', ['user' => User::findOrFail($id)]);
     }
     
-    public function store()
+    public function store(Request $request)
     {
         $user = Auth::user();
         
-        event(new WorkCreated($user));
+        event(new WorkCreated($user, ['count' => $request->input('count')]));
         
         return ['status' => 200];
     }
