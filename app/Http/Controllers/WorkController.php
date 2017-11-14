@@ -24,7 +24,12 @@ class WorkController extends Controller
     {
         $user = Auth::user();
         
-        event(new WorkCreated($user, ['count' => $request->input('count')]));
+        $count = $request->input('count');
+        
+        $user->clap = $user->clap + $count;
+        $user->save();
+        
+        event(new WorkCreated($user, ['count' => $count]));
         
         return ['status' => 200];
     }

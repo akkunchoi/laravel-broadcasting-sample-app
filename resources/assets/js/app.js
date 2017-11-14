@@ -25,15 +25,14 @@ class ParticipantRanking {
         }
         this.userCounts[id] += count || 0;
         this.calcRanking();
-        this.total++;
+        this.total = this.total + count;
     }
     update(user) {
         user = user || {};
         
         let id = user.id;
         if ( ! (id in this.userCounts) ) {
-            this.userCounts[id] = 0;
-            this.ranking.push({user: user, count: 0});
+            this.count(user, user.clap);
         } else {
             _.forEach(this.ranking, (userWithCount) => {
                 if (userWithCount.user.id === user.id) {
@@ -78,8 +77,8 @@ const app = new Vue({
 
 axios.get('/users').then((response) => {
     const users = response.data || [];
-    console.log(users);
     users.forEach((user) => {
+        user.clap = parseInt(user.clap, 10);
         participants.update(user);
     })
 });
