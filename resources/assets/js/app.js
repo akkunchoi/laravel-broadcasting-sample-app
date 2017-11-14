@@ -12,21 +12,28 @@ import _ from 'lodash';
 
 class ParticipantRanking {
     constructor() {
-        this.users = {};
+        this.userCounts = {};
         this.ranking = [];
     }
     count(user, count) {
         let id = user.id;
-        if ( ! (id in this.users) ) {
-            this.users[id] = 0;
+        if ( ! (id in this.userCounts) ) {
+            this.userCounts[id] = 0;
             this.ranking.push({user: user, count: 0});
         }
-        this.users[id] += count || 0;
+        this.userCounts[id] += count || 0;
         this.calcRanking();
+    }
+    update(user) {
+        _.forEach(this.ranking, (userWithCount) => {
+            if (userWithCount.user.id === user.id) {
+                userWithCount.user.name = user.name;
+            }
+        });
     }
     calcRanking() {
         _.forEach(this.ranking, (userWithCount) => {
-            userWithCount.count = this.users[userWithCount.user.id];
+            userWithCount.count = this.userCounts[userWithCount.user.id];
         });
         this.ranking.sort((a, b) => {
             // desc sort
@@ -65,6 +72,9 @@ const channel = window.Echo.join('hoge')
     })
     .listen('WorkCreated', (e) => {
         participants.count(e.user, e.count);
+    })
+    .listen('UserUpdated', (e) => {
+        participants.update(e.user);
     });
 
 console.log(channel);

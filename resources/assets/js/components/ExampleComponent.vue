@@ -1,22 +1,33 @@
 <template>
     <div class="container">
-        <div>
-            <button class="form-control" v-on:click="post">Tsunahiki</button>
-        </div>
-        <p>
-            You are {{user.name}}
-        </p>
-        <div class="list-group">
-            <li class="list-group-item" v-for="p in participants.ranking" v-bind:style="style(p)">
-                <div class="row">
-                    <div class="col-sm-8">
-                        <span v-text="p.user.name"></span>
-                    </div>
-                    <div class="col-sm-4">
-                        <span v-text="p.count"></span>
-                    </div>
+        <form class="form-inline">
+            <div class="form-group">
+                You are 
+                <input type="text" class="form-control" v-model="user.name" v-on:keyup="updateUserName" />
+            </div>
+        </form>
+        
+        <div class="row">
+            <div class="col-xs-6">
+                hoge
+                <div>
+                    <button class="form-control" v-on:click="post">Tsunahiki</button>
                 </div>
-            </li>
+                <div class="list-group">
+                    <li class="list-group-item" v-for="p in participants.ranking" v-bind:style="style(p)">
+                        <div class="row">
+                            <div class="col-sm-8">
+                                <span v-text="p.user.name"></span>
+                            </div>
+                            <div class="col-sm-4">
+                                <span v-text="p.count"></span>
+                            </div>
+                        </div>
+                    </li>
+                </div>                
+            </div>
+            <div class="col-xs-6">
+            </div>
         </div>
     </div>
 </template>
@@ -28,10 +39,16 @@
     export default {
         mounted() {
             this.count = 0;
+            this.delay = 500;
             this.throttlePost = _.throttle(() => {
                 axios.post('/works', {count: this.count});
                 this.count = 0;
-            }, 1000);
+            }, this.delay);
+            this.throttleUpdateUserName = _.throttle(() => {
+                if (this.user.name) {
+                    axios.put('/users/' + this.user.id, {name: this.user.name})
+                }
+            }, this.delay)
         },
         props: ['participants', 'user'],
         methods: {
@@ -46,6 +63,9 @@
             post() {
                 this.count++;
                 this.throttlePost();
+            },
+            updateUserName() {
+                this.throttleUpdateUserName();
             }
         }
     }
