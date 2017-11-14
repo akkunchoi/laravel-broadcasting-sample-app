@@ -44,8 +44,7 @@ class ParticipantRanking {
         
     }
     addMessage(message) {
-        console.log(message);
-        this.messages.unshift(_.assign({}, message));
+        this.messages.unshift(message);
     }
     calcRanking() {
         _.forEach(this.ranking, (userWithCount) => {
@@ -111,8 +110,8 @@ const channel = window.Echo.join('hoge')
     .listen('UserUpdated', (e) => {
         participants.update(e.user);
     })
-    .listen('MessageCreated', (message) => {
-        participants.addMessage(message);
+    .listen('MessageCreated', (e) => {
+        participants.addMessage(e.message);
     });
 
 console.log(channel);

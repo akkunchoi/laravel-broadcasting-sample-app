@@ -43,6 +43,7 @@
 
             .content {
                 text-align: center;
+                padding-top: 5px;
             }
 
             .title {
@@ -67,17 +68,6 @@
     </head>
     <body>
         <div class="position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-                        <a href="{{ route('register') }}">Register</a>
-                    @endauth
-                </div>
-            @endif
-
             <div class="content">
                 <div class="m-b-md">
                     <div id="app">

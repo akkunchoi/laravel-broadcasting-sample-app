@@ -1,14 +1,7 @@
 <template>
     <div class="container">
-        <form>
-            <div>
-                You are 
-                <input type="text" class="form-control user-name" v-model="user.name" v-on:keyup="updateUserName" />
-            </div>
-        </form>
-        
         <div class="row">
-            <div class="col-xs-6">
+            <div class="col-xs-3">
                 <div class="clap-area">
                     <button class="clap-target" v-on:click="post">👏</button>
                     <p class="clap-total">{{participants.total}}</p>
@@ -27,11 +20,13 @@
                 </div>                
             </div>
             
-            <div class="col-xs-6">
+            <div class="col-xs-9" style="text-align: left">
                 <form class="form-inline" v-on:submit="postMessage">
                     <div class="form-group">
-                        <input type="text" class="form-control user-name" v-model="message" />
-                        <button type="submit">
+                        You are 
+                        <input type="text" class="form-control user-name" v-model="user.name" v-on:keyup="updateUserName" />
+                        <input type="text" class="form-control user-name" v-model="message" placeholder="Input your comment"/>
+                        <button type="submit" class="btn btn-default" :disabled="sending" :class="{disabled: sending}">
                             <i class="glyphicon glyphicon-pencil"></i>
                         </button>
                     </div>
@@ -39,11 +34,11 @@
                 <div class="list-group">
                     <li class="list-group-item" v-for="m in participants.messages">
                         <div class="row">
-                            <div class="col-xs-8">
-                                <span v-text="m.text"></span>
-                            </div>
                             <div class="col-xs-4">
                                 <span v-text="m.user.name"></span>
+                            </div>
+                            <div class="col-xs-8">
+                                <span v-text="m.text"></span>
                             </div>
                         </div>
                     </li>
@@ -73,7 +68,8 @@
         },
         data() {
             return {
-                message: ''
+                message: '',
+                sending: false,
             }
         },
         props: ['participants', 'user'],
@@ -94,12 +90,18 @@
                 this.throttleUpdateUserName();
             },
             postMessage(e) {
+                e.preventDefault();
+                if (this.sending || !this.message) {
+                    return false;
+                }
+                this.sending = true;
                 axios.post('/messages', {text: this.message}).then(() => {
+                    this.sending = false;
                     this.message = '';
                 }, () => {
+                    this.sending = false;
                     this.message = '';
                 });
-                e.preventDefault();
                 return false;
             }
         }
