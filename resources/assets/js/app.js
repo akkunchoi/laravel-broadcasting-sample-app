@@ -15,6 +15,7 @@ class ParticipantRanking {
     constructor() {
         this.userCounts = {};
         this.ranking = [];
+        this.total = 0;
     }
     count(user, count) {
         let id = user.id;
@@ -24,6 +25,7 @@ class ParticipantRanking {
         }
         this.userCounts[id] += count || 0;
         this.calcRanking();
+        this.total++;
     }
     update(user) {
         user = user || {};

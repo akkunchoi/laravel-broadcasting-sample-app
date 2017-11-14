@@ -1,20 +1,20 @@
 <template>
     <div class="container">
-        <form class="form-inline">
-            <div class="form-group">
+        <form>
+            <div>
                 You are 
-                <input type="text" class="form-control" v-model="user.name" v-on:keyup="updateUserName" />
+                <input type="text" class="form-control user-name" v-model="user.name" v-on:keyup="updateUserName" />
             </div>
         </form>
         
         <div class="row">
             <div class="col-xs-6">
-                hoge
-                <div>
-                    <button class="form-control" v-on:click="post">Tsunahiki</button>
+                <div class="clap-area">
+                    <button class="clap-target" v-on:click="post">👏</button>
+                    <p class="clap-total">{{participants.total}}</p>
                 </div>
-                <div class="list-group">
-                    <li class="list-group-item" v-for="p in participants.ranking" v-bind:style="style(p)">
+                <div class="list-group" v-if="false">
+                    <li class="list-group-item" v-for="p in participants.ranking" v-bind:style="style(p)" v-if="p.count">
                         <div class="row">
                             <div class="col-sm-8">
                                 <span v-text="p.user.name"></span>
