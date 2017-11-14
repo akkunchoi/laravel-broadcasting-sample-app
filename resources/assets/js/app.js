@@ -9,6 +9,7 @@ require('./bootstrap');
 window.Vue = require('vue');
 
 import _ from 'lodash';
+import axios from 'axios';
 
 class ParticipantRanking {
     constructor() {
@@ -25,11 +26,20 @@ class ParticipantRanking {
         this.calcRanking();
     }
     update(user) {
-        _.forEach(this.ranking, (userWithCount) => {
-            if (userWithCount.user.id === user.id) {
-                userWithCount.user.name = user.name;
-            }
-        });
+        user = user || {};
+        
+        let id = user.id;
+        if ( ! (id in this.userCounts) ) {
+            this.userCounts[id] = 0;
+            this.ranking.push({user: user, count: 0});
+        } else {
+            _.forEach(this.ranking, (userWithCount) => {
+                if (userWithCount.user.id === user.id) {
+                    userWithCount.user.name = user.name;
+                }
+            });
+        }
+        
     }
     calcRanking() {
         _.forEach(this.ranking, (userWithCount) => {
@@ -37,7 +47,12 @@ class ParticipantRanking {
         });
         this.ranking.sort((a, b) => {
             // desc sort
-            return b.count - a.count;
+            let d = b.count - a.count;
+            if (d === 0) {
+                // asc sort
+                return a.user.id - b.user.id;
+            }
+            return d;
         });
     }
 }
@@ -57,6 +72,14 @@ const app = new Vue({
         participants: participants,
         user: Laravel.user
     }
+});
+
+axios.get('/users').then((response) => {
+    const users = response.data || [];
+    console.log(users);
+    users.forEach((user) => {
+        participants.update(user);
+    })
 });
 
 const channel = window.Echo.join('hoge')
