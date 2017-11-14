@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div class="row">
-            <div class="col-xs-3">
+            <div class="col-sm-3">
                 <div class="clap-area">
                     <button class="clap-target" v-on:click="post">👏</button>
                     <p class="clap-total">{{participants.total}}</p>
@@ -20,15 +20,22 @@
                 </div>                
             </div>
             
-            <div class="col-xs-9" style="text-align: left">
-                <form class="form-inline" v-on:submit="postMessage">
+            <div class="col-sm-9" style="text-align: left">
+                <form class="form-horizontal" v-on:submit="postMessage" style="margin-bottom: 5px;">
                     <div class="form-group">
-                        You are 
-                        <input type="text" class="form-control user-name" v-model="user.name" v-on:keyup="updateUserName" />
-                        <input type="text" class="form-control user-name" v-model="message" placeholder="Input your comment"/>
-                        <button type="submit" class="btn btn-default" :disabled="sending" :class="{disabled: sending}">
-                            <i class="glyphicon glyphicon-pencil"></i>
-                        </button>
+                        <div class="col-xs-4">
+                            <input type="text" class="form-control" v-model="user.name" v-on:keyup="updateUserName" placeholder="Your name"/>
+                        </div>
+                        <div class="col-xs-8">
+                            <div class="input-group">
+                                <input type="text" class="form-control" v-model="message" placeholder="Input your comment"/>
+                                <span class="input-group-btn">
+                                    <button type="submit" class="btn btn-default" :disabled="sending" :class="{disabled: sending}">
+                                        <i class="glyphicon glyphicon-pencil"></i>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
                     </div>
                 </form>
                 <div class="list-group">

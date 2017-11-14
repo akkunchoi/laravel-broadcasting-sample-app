@@ -15,7 +15,7 @@ class HomeController extends Controller
         if (!$user) {
             $uniqid = 'guest_' . uniqid();
             $user = new User();
-            $user->name = $uniqid;
+            $user->name = 'guest';
             $user->email = $uniqid . '@example.com';
             $user->password = $uniqid;
             $user->save();
