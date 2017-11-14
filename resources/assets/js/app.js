@@ -15,6 +15,7 @@ class ParticipantRanking {
     constructor() {
         this.userCounts = {};
         this.ranking = [];
+        this.messages = [];
         this.total = 0;
     }
     count(user, count) {
@@ -41,6 +42,10 @@ class ParticipantRanking {
             });
         }
         
+    }
+    addMessage(message) {
+        console.log(message);
+        this.messages.unshift(_.assign({}, message));
     }
     calcRanking() {
         _.forEach(this.ranking, (userWithCount) => {
@@ -82,6 +87,12 @@ axios.get('/users').then((response) => {
         participants.update(user);
     })
 });
+axios.get('/messages').then((response) => {
+    const messages = response.data || [];
+    messages.forEach((m) => {
+        participants.messages.push(m);
+    })
+});
 
 const channel = window.Echo.join('hoge')
     .here(() => {
@@ -99,6 +110,9 @@ const channel = window.Echo.join('hoge')
     })
     .listen('UserUpdated', (e) => {
         participants.update(e.user);
+    })
+    .listen('MessageCreated', (message) => {
+        participants.addMessage(message);
     });
 
 console.log(channel);

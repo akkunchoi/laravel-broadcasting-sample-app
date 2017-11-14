@@ -26,7 +26,28 @@
                     </li>
                 </div>                
             </div>
+            
             <div class="col-xs-6">
+                <form class="form-inline" v-on:submit="postMessage">
+                    <div class="form-group">
+                        <input type="text" class="form-control user-name" v-model="message" />
+                        <button type="submit">
+                            <i class="glyphicon glyphicon-pencil"></i>
+                        </button>
+                    </div>
+                </form>
+                <div class="list-group">
+                    <li class="list-group-item" v-for="m in participants.messages">
+                        <div class="row">
+                            <div class="col-xs-8">
+                                <span v-text="m.text"></span>
+                            </div>
+                            <div class="col-xs-4">
+                                <span v-text="m.user.name"></span>
+                            </div>
+                        </div>
+                    </li>
+                </div>
             </div>
         </div>
     </div>
@@ -48,7 +69,12 @@
                 if (this.user.name) {
                     axios.put('/users/' + this.user.id, {name: this.user.name})
                 }
-            }, this.delay)
+            }, this.delay);
+        },
+        data() {
+            return {
+                message: ''
+            }
         },
         props: ['participants', 'user'],
         methods: {
@@ -66,6 +92,15 @@
             },
             updateUserName() {
                 this.throttleUpdateUserName();
+            },
+            postMessage(e) {
+                axios.post('/messages', {text: this.message}).then(() => {
+                    this.message = '';
+                }, () => {
+                    this.message = '';
+                });
+                e.preventDefault();
+                return false;
             }
         }
     }
